@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export interface CartItem {
   id: string;
@@ -13,7 +13,7 @@ export interface CartItem {
 const DEPOSIT = 50;
 
 let globalCart: CartItem[] = [];
-let listeners: (() => void)[] = [];
+let listeners: Set<() => void> = new Set();
 
 function notify() {
   listeners.forEach((l) => l());
@@ -34,41 +34,26 @@ export function clearCart() {
   notify();
 }
 
-export function getCartItems() {
-  return globalCart;
-}
-
-export function getDeposit() {
-  return globalCart.length > 0 ? DEPOSIT : 0;
-}
-
-export function getCartTotal() {
-  const subtotal = globalCart.reduce((s, i) => s + i.termPrice + i.deliveryPrice, 0);
-  return subtotal + getDeposit();
-}
-
 export function useCart() {
   const [, setTick] = useState(0);
   const rerender = useCallback(() => setTick((t) => t + 1), []);
 
-  // subscribe on mount
-  if (typeof window !== "undefined") {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useState(() => {
-      listeners.push(rerender);
-      return () => {
-        listeners = listeners.filter((l) => l !== rerender);
-      };
-    });
-  }
+  useEffect(() => {
+    listeners.add(rerender);
+    return () => { listeners.delete(rerender); };
+  }, [rerender]);
+
+  const items = globalCart;
+  const deposit = items.length > 0 ? DEPOSIT : 0;
+  const subtotal = items.reduce((s, i) => s + i.termPrice + i.deliveryPrice, 0);
 
   return {
-    items: getCartItems(),
+    items,
     addToCart,
     removeFromCart,
     clearCart,
-    deposit: getDeposit(),
-    total: getCartTotal(),
-    count: globalCart.length,
+    deposit,
+    total: subtotal + deposit,
+    count: items.length,
   };
 }
