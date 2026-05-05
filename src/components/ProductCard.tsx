@@ -18,13 +18,16 @@ export function ProductCard({ product, index, onSelect }: ProductCardProps) {
       className="group"
     >
       <div className="bg-card rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-border/50">
-        <div className={`bg-gradient-to-br ${product.color} p-8 sm:p-10 flex items-center justify-center`}>
-          <span className="text-7xl sm:text-8xl group-hover:scale-110 transition-transform duration-300">
-            {product.emoji}
-          </span>
+        <div className={`bg-gradient-to-br ${product.color} p-6 sm:p-8 flex items-center justify-center`}>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-40 sm:h-48 object-contain group-hover:scale-105 transition-transform duration-300"
+          />
         </div>
         <div className="p-5 sm:p-6">
-          <h3 className="text-xl font-extrabold text-foreground mb-2">{product.name}</h3>
+          <h3 className="text-xl font-extrabold text-foreground mb-1">{product.name}</h3>
+          <p className="text-xs text-muted-foreground mb-2">{product.dimensions} · {product.weight}</p>
           <p className="text-sm text-muted-foreground leading-relaxed mb-4 line-clamp-2">{product.description}</p>
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-primary">Vanaf €15/week</span>
