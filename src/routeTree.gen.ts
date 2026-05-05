@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WinkelmandjeRouteImport } from './routes/winkelmandje'
+import { Route as MeubelsRouteImport } from './routes/meubels'
+import { Route as InstructiesRouteImport } from './routes/instructies'
+import { Route as HoeHetWerktRouteImport } from './routes/hoe-het-werkt'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as IndexRouteImport } from './routes/index'
 
+const WinkelmandjeRoute = WinkelmandjeRouteImport.update({
+  id: '/winkelmandje',
+  path: '/winkelmandje',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeubelsRoute = MeubelsRouteImport.update({
+  id: '/meubels',
+  path: '/meubels',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstructiesRoute = InstructiesRouteImport.update({
+  id: '/instructies',
+  path: '/instructies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HoeHetWerktRoute = HoeHetWerktRouteImport.update({
+  id: '/hoe-het-werkt',
+  path: '/hoe-het-werkt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,102 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/hoe-het-werkt': typeof HoeHetWerktRoute
+  '/instructies': typeof InstructiesRoute
+  '/meubels': typeof MeubelsRoute
+  '/winkelmandje': typeof WinkelmandjeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/hoe-het-werkt': typeof HoeHetWerktRoute
+  '/instructies': typeof InstructiesRoute
+  '/meubels': typeof MeubelsRoute
+  '/winkelmandje': typeof WinkelmandjeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/hoe-het-werkt': typeof HoeHetWerktRoute
+  '/instructies': typeof InstructiesRoute
+  '/meubels': typeof MeubelsRoute
+  '/winkelmandje': typeof WinkelmandjeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/checkout'
+    | '/hoe-het-werkt'
+    | '/instructies'
+    | '/meubels'
+    | '/winkelmandje'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/checkout'
+    | '/hoe-het-werkt'
+    | '/instructies'
+    | '/meubels'
+    | '/winkelmandje'
+  id:
+    | '__root__'
+    | '/'
+    | '/checkout'
+    | '/hoe-het-werkt'
+    | '/instructies'
+    | '/meubels'
+    | '/winkelmandje'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheckoutRoute: typeof CheckoutRoute
+  HoeHetWerktRoute: typeof HoeHetWerktRoute
+  InstructiesRoute: typeof InstructiesRoute
+  MeubelsRoute: typeof MeubelsRoute
+  WinkelmandjeRoute: typeof WinkelmandjeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/winkelmandje': {
+      id: '/winkelmandje'
+      path: '/winkelmandje'
+      fullPath: '/winkelmandje'
+      preLoaderRoute: typeof WinkelmandjeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meubels': {
+      id: '/meubels'
+      path: '/meubels'
+      fullPath: '/meubels'
+      preLoaderRoute: typeof MeubelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instructies': {
+      id: '/instructies'
+      path: '/instructies'
+      fullPath: '/instructies'
+      preLoaderRoute: typeof InstructiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hoe-het-werkt': {
+      id: '/hoe-het-werkt'
+      path: '/hoe-het-werkt'
+      fullPath: '/hoe-het-werkt'
+      preLoaderRoute: typeof HoeHetWerktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,16 +157,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheckoutRoute: CheckoutRoute,
+  HoeHetWerktRoute: HoeHetWerktRoute,
+  InstructiesRoute: InstructiesRoute,
+  MeubelsRoute: MeubelsRoute,
+  WinkelmandjeRoute: WinkelmandjeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
