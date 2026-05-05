@@ -34,7 +34,7 @@ function InstructiesPage() {
             <h3 className="font-bold text-lg text-foreground">Maak je geen zorgen!</h3>
             <p className="text-foreground/80 leading-relaxed mt-1">
               Onze meubels zijn ontworpen om eenvoudig in elkaar te zetten — geen speciaal gereedschap nodig. 
-              De gemiddelde bouwtijd is 15-20 minuten. En het leukste? Je kind kan meehelpen! 
+              De gemiddelde bouwtijd is ongeveer 30 minuten. En het leukste? Je kind kan meehelpen! 
               Samen bouwen is tenslotte de helft van de pret. 🎉
             </p>
           </div>
@@ -52,7 +52,7 @@ function InstructiesPage() {
               className="bg-card rounded-2xl border overflow-hidden"
             >
               <div className={`bg-gradient-to-br ${product.color} p-6 flex items-center gap-4`}>
-                <span className="text-4xl">{product.emoji}</span>
+                <img src={product.image} alt={product.name} className="h-16 object-contain" />
                 <h3 className="text-lg font-extrabold text-foreground">{product.name}</h3>
               </div>
               <div className="p-5 flex flex-col gap-3">
