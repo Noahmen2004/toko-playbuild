@@ -119,6 +119,39 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Lifestyle Gallery */}
+      <section className="py-16 bg-toko-cream/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground">Speelplezier in beeld</h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">Bekijk hoe kinderen genieten van onze houten speelmeubels!</p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { src: heroImg, alt: "Kinderen spelen met winkel en keuken" },
+              { src: kitchenImg, alt: "Kinderen bij de speelkeuken" },
+              { src: shopImg, alt: "Pastelkleurige winkeltjes" },
+              { src: icecartImg, alt: "IJskar in de tuin" },
+            ].map((img, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-16 bg-gradient-to-r from-primary to-toko-wood">
         <div className="max-w-4xl mx-auto px-4 text-center">
