@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductModal } from "@/components/ProductModal";
 import { products, type Product } from "@/lib/products";
+import heroImg from "@/assets/lifestyle/kids-playing.jpg";
+import kitchenImg from "@/assets/lifestyle/kitchen-play.jpg";
+import shopImg from "@/assets/lifestyle/shop-play.jpg";
+import icecartImg from "@/assets/lifestyle/icecart-outdoor.jpg";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
