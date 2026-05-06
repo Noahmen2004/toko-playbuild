@@ -6,6 +6,10 @@ import { Button } from "@/components/ui/button";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductModal } from "@/components/ProductModal";
 import { products, type Product } from "@/lib/products";
+import heroImg from "@/assets/lifestyle/kids-playing.jpg";
+import kitchenImg from "@/assets/lifestyle/kitchen-play.jpg";
+import shopImg from "@/assets/lifestyle/shop-play.jpg";
+import icecartImg from "@/assets/lifestyle/icecart-outdoor.jpg";
 
 export const Route = createFileRoute("/")({
   component: HomePage,
@@ -19,7 +23,7 @@ function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-toko-cream via-background to-toko-peach/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
-          <div className="max-w-3xl">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -48,11 +52,20 @@ function HomePage() {
                 </Link>
               </div>
             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="hidden lg:block"
+            >
+              <img
+                src={heroImg}
+                alt="Kinderen spelen met houten speelmeubels van Toko 4kids"
+                className="rounded-3xl shadow-2xl w-full object-cover max-h-[480px]"
+              />
+            </motion.div>
           </div>
         </div>
-        {/* Decorative shapes */}
-        <div className="absolute top-10 right-10 sm:right-20 text-6xl sm:text-8xl opacity-20 rotate-12">🏠</div>
-        <div className="absolute bottom-10 right-1/4 text-5xl sm:text-7xl opacity-15 -rotate-6">🧸</div>
       </section>
 
       {/* USPs */}
@@ -102,6 +115,39 @@ function HomePage() {
                 Bekijk alle meubels <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Lifestyle Gallery */}
+      <section className="py-16 bg-toko-cream/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground">Speelplezier in beeld</h2>
+            <p className="text-muted-foreground mt-3 max-w-xl mx-auto">Bekijk hoe kinderen genieten van onze houten speelmeubels!</p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { src: heroImg, alt: "Kinderen spelen met winkel en keuken" },
+              { src: kitchenImg, alt: "Kinderen bij de speelkeuken" },
+              { src: shopImg, alt: "Pastelkleurige winkeltjes" },
+              { src: icecartImg, alt: "IJskar in de tuin" },
+            ].map((img, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300"
+              >
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-48 sm:h-56 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
