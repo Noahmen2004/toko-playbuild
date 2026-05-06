@@ -23,7 +23,7 @@ function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-toko-cream via-background to-toko-peach/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
-          <div className="max-w-3xl">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -52,11 +52,20 @@ function HomePage() {
                 </Link>
               </div>
             </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="hidden lg:block"
+            >
+              <img
+                src={heroImg}
+                alt="Kinderen spelen met houten speelmeubels van Toko 4kids"
+                className="rounded-3xl shadow-2xl w-full object-cover max-h-[480px]"
+              />
+            </motion.div>
           </div>
         </div>
-        {/* Decorative shapes */}
-        <div className="absolute top-10 right-10 sm:right-20 text-6xl sm:text-8xl opacity-20 rotate-12">🏠</div>
-        <div className="absolute bottom-10 right-1/4 text-5xl sm:text-7xl opacity-15 -rotate-6">🧸</div>
       </section>
 
       {/* USPs */}
